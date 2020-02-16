@@ -1,2 +1,2 @@
-# BashMUp
-shmup but with bash instead of sh
+# WormholeMUp
+bashmup but with holes instead of bashing
