@@ -1,3 +1,9 @@
-[gd_scene format=2]
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Assets/heart-ships.svg" type="Texture" id=1]
 
 [node name="Node2D" type="Node2D"]
+
+[node name="heart-ships" type="Sprite" parent="."]
+position = Vector2( 483.147, 360.399 )
+texture = ExtResource( 1 )
