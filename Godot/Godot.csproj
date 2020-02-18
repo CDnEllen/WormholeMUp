@@ -54,8 +54,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Scenes\PlayerShip.cs" />
+    <Compile Include="Scripts\PlayerShip.cs" />
     <Compile Include="Scripts\SimpleMove.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Scenes\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

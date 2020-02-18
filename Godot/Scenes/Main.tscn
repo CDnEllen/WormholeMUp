@@ -1,7 +1,7 @@
 [gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Assets/blue-heart-ship.svg" type="Texture" id=1]
-[ext_resource path="res://Scenes/PlayerShip.cs" type="Script" id=2]
+[ext_resource path="res://Scripts/PlayerShip.cs" type="Script" id=2]
 [ext_resource path="res://Assets/red-heart-ship.svg" type="Texture" id=3]
 [ext_resource path="res://Assets/red-heart-portal.svg" type="Texture" id=4]
 [ext_resource path="res://Assets/enemy-ship-1.svg" type="Texture" id=5]
@@ -9,7 +9,7 @@
 [ext_resource path="res://Scenes/Animations/bounce_scale.anim" type="Animation" id=7]
 [ext_resource path="res://Scripts/SimpleMove.cs" type="Script" id=8]
 
-[sub_resource type="Shader" id=3]
+[sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
 
 uniform float amount : hint_range(0, 1) = 0.0;
@@ -32,11 +32,11 @@ void fragment() {
 		);
 }"
 
-[sub_resource type="ShaderMaterial" id=4]
-shader = SubResource( 3 )
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
 shader_param/amount = 0.0
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=3]
 resource_name = "portal-wipe"
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:material:shader_param/amount")
@@ -51,7 +51,7 @@ tracks/0/keys = {
 "values": [ 0.0, 1.0 ]
 }
 
-[sub_resource type="RectangleShape2D" id=6]
+[sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 63.4555, 29.4415 )
 
 [node name="Node2D" type="Node2D"]
@@ -59,7 +59,6 @@ extents = Vector2( 63.4555, 29.4415 )
 [node name="Player Ship A" type="KinematicBody2D" parent="."]
 position = Vector2( 294.08, 204.055 )
 script = ExtResource( 2 )
-speed = 1000.0
 
 [node name="Sprite" type="Sprite" parent="Player Ship A"]
 rotation = -1.5708
@@ -85,7 +84,6 @@ texture = ExtResource( 6 )
 position = Vector2( 297.596, 416.784 )
 script = ExtResource( 2 )
 id = 1
-speed = 1000.0
 
 [node name="Sprite" type="Sprite" parent="Player Ship B"]
 rotation = -1.5708
@@ -113,12 +111,12 @@ script = ExtResource( 8 )
 velocity = Vector2( -1, 0 )
 
 [node name="enemy-ship-1" type="Sprite" parent="KinematicBody2D"]
-material = SubResource( 4 )
+material = SubResource( 2 )
 rotation = 1.5708
 texture = ExtResource( 5 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="KinematicBody2D/enemy-ship-1"]
-anims/portal-wipe = SubResource( 5 )
+anims/portal-wipe = SubResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D"]
-shape = SubResource( 6 )
+shape = SubResource( 4 )
