@@ -57,6 +57,7 @@ public class PortalableObject : KinematicBody2D
 
     public override void _PhysicsProcess(float delta)
     {
+        GD.Print("3?");
         KinematicCollision2D col = MoveAndCollide(velocity);
         if (col != null)
         {
@@ -68,10 +69,13 @@ public class PortalableObject : KinematicBody2D
             }
         }
 
-        if (shrinking && Scale.x < 0.01f && Scale.y < 0.01f) // if shrinking is finished
+
+        GD.Print("4?");
+        if (shrinking && Scale.x < 0.81f && Scale.y < 0.81f) // if shrinking is finished
         {
+            GD.Print("1");
             // teleport to other portal
-            GlobalPosition = Vector2.Zero; //teleportTarget.GlobalPosition + new Vector2(((Sprite)GetChild(0)).Texture.GetSize().x * 0.75f, 0f);
+            GlobalPosition = teleportTarget.GlobalPosition;
             RotationDegrees = 180f;
             velocity.x = -velocity.x;
             velocity.y = -velocity.y;
@@ -80,29 +84,24 @@ public class PortalableObject : KinematicBody2D
             // grow
             GrowToNormal();
         }
+        GD.Print("2?");
     }
 
     private bool CheckPortalType(KinematicCollision2D col)
     {
-        // object portalType = col.Collider.Get("portalType");
-        Node portalNode = (Node)col.Collider;
-        // PortalType? portalType = (PortalType?)portalNode.Get("portalType");
-        try // consider not using a try-catch?
+        if ((col.Collider as Node).Name == "Portal")
         {
+            Node portalNode = (Node)col.Collider;
             Portal portal = (Portal)portalNode;
             PortalType portalType = portal.portalType;
 
-            if (portalType == PortalType.Output)
+            if (portalType == PortalType.Input)
             {
-                return false; // an output portal
+                teleportTarget = (Node2D)GetNode(portal.pairedPortal);
+                return true; // this means the portal can be entered
             }
-            teleportTarget = (Node2D)GetNode(portal.pairedPortal);
         }
-        catch
-        {
-            return false;
-        }
-        return true; // this means the portal can be entered
+        return false; // this means the portal cant be entered
     }
 
     private void ShrinkToNothing()

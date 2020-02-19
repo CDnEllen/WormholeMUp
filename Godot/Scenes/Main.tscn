@@ -6,7 +6,7 @@
 [ext_resource path="res://Assets/red-heart-portal.svg" type="Texture" id=4]
 [ext_resource path="res://Assets/enemy-ship-1.svg" type="Texture" id=5]
 [ext_resource path="res://Assets/red-heart-portal-top.svg" type="Texture" id=6]
-[ext_resource path="res://Scenes/Animations/bounce_scale.anim" type="Animation" id=7]
+[ext_resource path="res://Animations/bounce_scale.anim" type="Animation" id=7]
 [ext_resource path="res://Scripts/SimpleMove.cs" type="Script" id=8]
 [ext_resource path="res://Scripts/Portal.cs" type="Script" id=9]
 
@@ -43,7 +43,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.25 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Vector2( 1e-05, 1e-05 ), Vector2( 1, 1 ) ]
+"values": [ Vector2( 0.8, 0.8 ), Vector2( 1, 1 ) ]
 }
 
 [sub_resource type="Animation" id=5]
@@ -58,7 +58,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.25 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Vector2( 1, 1 ), Vector2( 1e-05, 1e-05 ) ]
+"values": [ Vector2( 1, 1 ), Vector2( 0.8, 0.8 ) ]
 }
 
 [node name="Node2D" type="Node2D"]
