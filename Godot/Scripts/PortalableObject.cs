@@ -57,7 +57,6 @@ public class PortalableObject : KinematicBody2D
 
     public override void _PhysicsProcess(float delta)
     {
-        GD.Print("3?");
         KinematicCollision2D col = MoveAndCollide(velocity);
         if (col != null)
         {
@@ -69,11 +68,8 @@ public class PortalableObject : KinematicBody2D
             }
         }
 
-
-        GD.Print("4?");
         if (shrinking && Scale.x < 0.81f && Scale.y < 0.81f) // if shrinking is finished
         {
-            GD.Print("1");
             // teleport to other portal
             GlobalPosition = teleportTarget.GlobalPosition;
             RotationDegrees = 180f;
@@ -84,7 +80,6 @@ public class PortalableObject : KinematicBody2D
             // grow
             GrowToNormal();
         }
-        GD.Print("2?");
     }
 
     private bool CheckPortalType(KinematicCollision2D col)
