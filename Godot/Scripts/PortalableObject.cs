@@ -67,10 +67,12 @@ public class PortalableObject : KinematicBody2D
                 bool isInputCapablePortal = CheckPortalType(col);
                 if (isInputCapablePortal)
                 {
-                    ShrinkToNothing();
+                    float y = GlobalPosition.y;
                     GlobalPosition = Vector2.Zero;
+                    ShrinkToNothing();
                     GetParent().RemoveChild(this);
                     (col.Collider as Node2D).AddChild(this);
+                    GlobalPosition = new Vector2(GlobalPosition.x, y);
                 }
             }
         }

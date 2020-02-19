@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Scripts/PlayerShip.cs" type="Script" id=1]
 [ext_resource path="res://Assets/red-heart-portal.svg" type="Texture" id=2]
@@ -21,6 +21,9 @@ tracks/0/keys = {
 "update": 0,
 "values": [ Vector2( 1, 1 ), Vector2( 0.95, 0.95 ), Vector2( 1, 1 ) ]
 }
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 21.2794, 69.151 )
 
 [node name="Ship" type="KinematicBody2D"]
 position = Vector2( 558.215, 412.489 )
@@ -50,5 +53,5 @@ texture = ExtResource( 2 )
 z_index = 1
 texture = ExtResource( 5 )
 
-[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="Portal"]
-polygon = PoolVector2Array( 0.32959, 64, -8.5, 64, -8.5, 63.4, -12.5, 53.4, -12.5, 39, -13.5, 39, -15.5, 36.4, -15.5, -35.6, -12.5, -38, -12.5, -53.4, -8.5, -63.4, -8.5, -64, 0.32959, -64 )
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Portal"]
+shape = SubResource( 2 )
