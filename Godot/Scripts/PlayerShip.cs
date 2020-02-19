@@ -14,9 +14,9 @@ public class PlayerShip : KinematicBody2D
     // private int a = 2;
     // private string b = "text";
     [Export]
-    private ShipControlScheme controlScheme = ShipControlScheme.LeftStick;
+    private ShipControlScheme controlScheme;
     [Export]
-    private float speed = 1000;
+    private float speed;
 
     private Vector2 inputDirection;
     public Vector2 velocity = new Vector2();
@@ -39,7 +39,7 @@ public class PlayerShip : KinematicBody2D
         if (inputDirection.Length() > 1)
             inputDirection.Normalized();
         velocity = inputDirection * speed;
-        velocity = MoveAndSlide(velocity);
+        Translate(velocity);
 
 
     }

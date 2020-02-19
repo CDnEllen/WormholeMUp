@@ -6,7 +6,8 @@ public class PortalableObject : KinematicBody2D
     // Declare member variables here. Examples:
     // private int a = 2;
     // private string b = "text";
-
+    [Export]
+    private NodePath enemyContainer;
     [Export]
     protected Vector2 velocity = new Vector2();
     [Export]
@@ -57,19 +58,29 @@ public class PortalableObject : KinematicBody2D
 
     public override void _PhysicsProcess(float delta)
     {
-        KinematicCollision2D col = MoveAndCollide(velocity);
-        if (col != null)
+        if (!shrinking)
         {
-            bool isInputCapablePortal = CheckPortalType(col);
-            if (isInputCapablePortal && !shrinking)
+            KinematicCollision2D col = MoveAndCollide(velocity, true, true, true);
+            Translate(velocity);
+            if (col != null)
             {
-
-                ShrinkToNothing();
+                bool isInputCapablePortal = CheckPortalType(col);
+                if (isInputCapablePortal)
+                {
+                    ShrinkToNothing();
+                    GlobalPosition = Vector2.Zero;
+                    GetParent().RemoveChild(this);
+                    (col.Collider as Node2D).AddChild(this);
+                }
             }
         }
 
-        if (shrinking && Scale.x < 0.81f && Scale.y < 0.81f) // if shrinking is finished
+        if (shrinking && Scale.x < 0.26f && Scale.y < 0.26f) // if shrinking is finished
         {
+            Node node = GetNode("/root/Node2D/Enemies");
+            GetParent().RemoveChild(this);
+            node.AddChild(this);
+
             // teleport to other portal
             GlobalPosition = teleportTarget.GlobalPosition;
             RotationDegrees = 180f;

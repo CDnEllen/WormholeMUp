@@ -25,7 +25,7 @@ tracks/0/keys = {
 [node name="Ship" type="KinematicBody2D"]
 position = Vector2( 558.215, 412.489 )
 script = ExtResource( 1 )
-controlScheme = 0
+speed = 15.0
 
 [node name="Sprite" type="Sprite" parent="."]
 rotation = -1.5708

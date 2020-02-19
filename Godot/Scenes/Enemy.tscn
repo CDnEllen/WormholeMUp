@@ -3,12 +3,12 @@
 [ext_resource path="res://Scripts/SimpleMove.cs" type="Script" id=1]
 [ext_resource path="res://Assets/enemy-ship-1.svg" type="Texture" id=2]
 
-[sub_resource type="ShaderMaterial" id=2]
+[sub_resource type="ShaderMaterial" id=1]
 
-[sub_resource type="RectangleShape2D" id=3]
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 63.4555, 29.4415 )
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=3]
 resource_name = "grow_to_full"
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:scale")
@@ -20,10 +20,10 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.25 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Vector2( 0.8, 0.8 ), Vector2( 1, 1 ) ]
+"values": [ Vector2( 0.25, 0.25 ), Vector2( 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=4]
 resource_name = "shrink_to_nothing"
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:scale")
@@ -35,7 +35,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.25 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Vector2( 1, 1 ), Vector2( 0.8, 0.8 ) ]
+"values": [ Vector2( 1, 1 ), Vector2( 0.25, 0.25 ) ]
 }
 
 [node name="Enemy" type="KinematicBody2D"]
@@ -45,13 +45,13 @@ velocity = Vector2( -5, 0 )
 animationPlayerNode = NodePath("AnimationPlayer")
 
 [node name="enemy-ship-1" type="Sprite" parent="."]
-material = SubResource( 2 )
+material = SubResource( 1 )
 rotation = 1.5708
 texture = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 3 )
+shape = SubResource( 2 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/grow_to_full = SubResource( 4 )
-anims/shrink_to_nothing = SubResource( 5 )
+anims/grow_to_full = SubResource( 3 )
+anims/shrink_to_nothing = SubResource( 4 )
