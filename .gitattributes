@@ -1,0 +1,17 @@
+# Set the default behavior, in case people don't have core.autocrlf set.
+* text=auto
+
+# Explicitly declare text files you want to always be normalized and converted
+# to native line endings on checkout.
+*.cs text
+*.sln text
+
+# Denote all files that are truly binary and should not be modified.
+*.png       binary
+*.jepg      binary
+*.ogg       binary
+*.ase       binary
+*.aseprite  binary
+*.mp3       binary
+
+*.sdf       binary
