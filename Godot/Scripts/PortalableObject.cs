@@ -3,11 +3,6 @@ using System;
 
 public class PortalableObject : KinematicBody2D
 {
-    // Declare member variables here. Examples:
-    // private int a = 2;
-    // private string b = "text";
-    [Export]
-    private NodePath enemyContainer;
     [Export]
     protected Vector2 velocity = new Vector2();
     [Export]
