@@ -88,7 +88,7 @@ public class PortalableObject : KinematicBody2D
             RotationDegrees = 180f;
             velocity.x = -velocity.x;
             velocity.y = -velocity.y;
-            velocity += ((PlayerShip)teleportTarget.GetParent()).velocity;
+            //velocity += ((PlayerShip)teleportTarget.GetParent()).velocity;
 
             // grow
             GrowToNormal();
