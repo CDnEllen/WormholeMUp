@@ -1,0 +1,54 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Scripts/PlayerShip.cs" type="Script" id=1]
+[ext_resource path="res://Assets/red-heart-portal.svg" type="Texture" id=2]
+[ext_resource path="res://Assets/blue-heart-ship.svg" type="Texture" id=3]
+[ext_resource path="res://Scripts/Portal.cs" type="Script" id=4]
+[ext_resource path="res://Assets/red-heart-portal-top.svg" type="Texture" id=5]
+
+[sub_resource type="Animation" id=1]
+resource_name = "bounce_scale"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 0.95, 0.95 ), Vector2( 1, 1 ) ]
+}
+
+[node name="Ship" type="KinematicBody2D"]
+position = Vector2( 558.215, 412.489 )
+script = ExtResource( 1 )
+controlScheme = 0
+
+[node name="Sprite" type="Sprite" parent="."]
+rotation = -1.5708
+z_index = -1
+texture = ExtResource( 3 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+rotation = -1.5708
+polygon = PoolVector2Array( 51, -40.8, 51, -39.2, 61, -26.2, 61, -0.5, 55.4, 13.5, 53.8, 13.5, 27, 40.3, 33, 44.4, 33, 50.3, 28.8, 54.5, 26.5, 54.5, 8.5, 63.5, -6.7, 63.5, -30, 53.8, -30, 52, -34.2, 43.5, -30.9, 43.5, -28.1, 40.1, -58, 9.3, -58, 7, -61, 1, -61, -22.1, -57.5, -33.5, -56, -33.5, -51, -40.5, -48.6, -40.5, -6.5, -63.5, 0.799999, -63.5 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/bounce_scale = SubResource( 1 )
+
+[node name="Portal" type="KinematicBody2D" parent="."]
+position = Vector2( 100, 0 )
+script = ExtResource( 4 )
+
+[node name="Sprite" type="Sprite" parent="Portal"]
+texture = ExtResource( 2 )
+
+[node name="Portal Top" type="Sprite" parent="Portal/Sprite"]
+z_index = 1
+texture = ExtResource( 5 )
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="Portal"]
+polygon = PoolVector2Array( 0.32959, 64, -8.5, 64, -8.5, 63.4, -12.5, 53.4, -12.5, 39, -13.5, 39, -15.5, 36.4, -15.5, -35.6, -12.5, -38, -12.5, -53.4, -8.5, -63.4, -8.5, -64, 0.32959, -64 )

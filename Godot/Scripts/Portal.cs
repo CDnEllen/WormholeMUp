@@ -3,6 +3,7 @@ using System;
 
 public enum PortalType
 {
+    Unknown,
     Both,
     Input,
     Output
@@ -10,11 +11,8 @@ public enum PortalType
 
 public class Portal : KinematicBody2D
 {
-    // Declare member variables here. Examples:
-    // private int a = 2;
-    // private string b = "text";
     [Export]
-    public PortalType portalType = PortalType.Both;
+    public PortalType portalType = PortalType.Unknown;
     [Export]
     public NodePath pairedPortal;
 

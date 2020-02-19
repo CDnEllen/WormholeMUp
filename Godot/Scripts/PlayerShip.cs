@@ -1,18 +1,20 @@
 using Godot;
 using System;
 
-public enum PlayerShipID
+public enum ShipControlScheme
 {
-    A,
-    B
+    Unknown,
+    LeftStick,
+    RightStick,
 }
+
 public class PlayerShip : KinematicBody2D
 {
     // Declare member variables here. Examples:
     // private int a = 2;
     // private string b = "text";
     [Export]
-    private PlayerShipID id = PlayerShipID.A;
+    private ShipControlScheme controlScheme = ShipControlScheme.LeftStick;
     [Export]
     private float speed = 1000;
 
@@ -45,14 +47,14 @@ public class PlayerShip : KinematicBody2D
     public void CheckMovement()
     {
         inputDirection = Vector2.Zero;
-        if (id == PlayerShipID.A)
+        if (controlScheme == ShipControlScheme.LeftStick)
         {
             inputDirection.y -= Input.GetActionStrength("a_move_up");
             inputDirection.y += Input.GetActionStrength("a_move_down");
             inputDirection.x += Input.GetActionStrength("a_move_right");
             inputDirection.x -= Input.GetActionStrength("a_move_left");
         }
-        else if (id == PlayerShipID.B)
+        else if (controlScheme == ShipControlScheme.RightStick)
         {
             inputDirection.y -= Input.GetActionStrength("b_move_up");
             inputDirection.y += Input.GetActionStrength("b_move_down");
