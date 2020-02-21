@@ -59,7 +59,10 @@ public class PortalableObject : Area2D
             if (this is Enemy)
                 ((Enemy)this).Turned = true;
             if (this is Bullet)
+            {
                 ((Bullet)this).IsEnemyBullet = false;
+                ((Sprite)GetNode("./Sprite")).SelfModulate = ((Bullet)this).FriendlyBulletColor;
+            }
             GlobalPosition = teleportTarget.GlobalPosition + new Vector2(0.0f, Position.y);
             Rotate((float)Math.PI);
 

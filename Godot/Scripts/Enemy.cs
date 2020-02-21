@@ -40,6 +40,8 @@ public class Enemy : PortalableObject
             instance.GlobalPosition = ((Node2D)GetNode(BulletSpawnPoint)).GlobalPosition;
             instance.GlobalRotation = GlobalRotation;
             instance.IsEnemyBullet = !Turned;
+            if (Turned)
+                ((Sprite)instance.GetNode("./Sprite")).SelfModulate = instance.FriendlyBulletColor;
         }
     }
 }
