@@ -26,8 +26,18 @@ pairedPortal = NodePath("../../PlayerA/Portal")
 
 [node name="Enemies" type="Node2D" parent="."]
 
+[node name="Enemy3" parent="Enemies" instance=ExtResource( 2 )]
+
+[node name="Enemy2" parent="Enemies" instance=ExtResource( 2 )]
+position = Vector2( 1536.27, 519.96 )
+
 [node name="Enemy" parent="Enemies" instance=ExtResource( 2 )]
+position = Vector2( 1535.87, 457.4 )
+
+[node name="Bullets" type="Node2D" parent="."]
 
 [editable path="PlayerA"]
 
 [editable path="PlayerB"]
+
+[editable path="Enemies/Enemy"]

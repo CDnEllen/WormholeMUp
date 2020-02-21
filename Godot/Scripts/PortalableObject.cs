@@ -10,82 +10,59 @@ public class PortalableObject : KinematicBody2D
     [Export]
     NodePath animationPlayerNode;
     AnimationPlayer animationPlayer;
-    Animation shrinkAnimation;
-    Animation growAnimation;
-    private bool shrinking = false;
+    public bool shrinking;
     private Node2D teleportTarget;
+    private NodePath originalPath;
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
-        // shrinkAnimation = new Animation();
-        // shrinkAnimation.AddTrack(0);
-        // shrinkAnimation.Length = shrinkTime;
+        base._Ready();
 
-        // shrinkAnimation.TrackSetPath(0, (string)GetPath() + ":Scale"); // may need to do x and y separately
-        // shrinkAnimation.TrackInsertKey(0, 0.0f, 1f);
-        // shrinkAnimation.TrackInsertKey(0, shrinkTime, 0f);
-        // shrinkAnimation.ValueTrackSetUpdateMode(0, Animation.UpdateMode.Continuous); // may need to be set to Discrete or another mode
-
-        // growAnimation = new Animation();
-        // growAnimation.AddTrack(0);
-        // growAnimation.Length = shrinkTime;
-
-        // growAnimation.TrackSetPath(0, (string)GetPath() + ":Scale"); // may need to do x and y separately
-        // growAnimation.TrackInsertKey(0, 0.0f, 0f);
-        // growAnimation.TrackInsertKey(0, shrinkTime, 1f);
-        // growAnimation.ValueTrackSetUpdateMode(0, Animation.UpdateMode.Continuous); // may need to be set to Discrete or another mode
-
-        // animationPlayer = new AnimationPlayer();
-        // AddChild(animationPlayer);
         animationPlayer = (AnimationPlayer)GetNode(animationPlayerNode);
-        // animationPlayer.AddAnimation("shrink", shrinkAnimation);
-        // animationPlayer.AddAnimation("grow", growAnimation);
-
-
     }
-
-    //  // Called every frame. 'delta' is the elapsed time since the previous frame.
-    //  public override void _Process(float delta)
-    //  {
-    //      
-    //  }
 
     public override void _PhysicsProcess(float delta)
     {
         if (!shrinking)
         {
             KinematicCollision2D col = MoveAndCollide(velocity, true, true, true);
-            Translate(velocity);
+            Translate(velocity.Rotated(this.Rotation));
             if (col != null)
             {
-                bool isInputCapablePortal = CheckPortalType(col);
-                if (isInputCapablePortal)
+                if ((this is Enemy && !((Enemy)this).Turned) ||
+                    (this is Bullet && ((Bullet)this).IsEnemyBullet))
                 {
-                    float y = GlobalPosition.y;
-                    GlobalPosition = Vector2.Zero;
-                    ShrinkToNothing();
-                    GetParent().RemoveChild(this);
-                    (col.Collider as Node2D).AddChild(this);
-                    GlobalPosition = new Vector2(GlobalPosition.x, y);
+                    bool isInputCapablePortal = CheckPortalType(col);
+                    if (isInputCapablePortal)
+                    {
+                        float y = GlobalPosition.y;
+                        GlobalPosition = Vector2.Zero;
+                        ShrinkToNothing();
+                        originalPath = GetParent().GetPath();
+                        GetParent().RemoveChild(this);
+                        ((Node2D)col.Collider).AddChild(this);
+                        GlobalPosition = new Vector2(GlobalPosition.x, y);
+                    }
                 }
             }
         }
 
-        if (shrinking && Scale.x < 0.26f && Scale.y < 0.26f) // if shrinking is finished
+        if ((shrinking && Scale.x < 0.26f && Scale.y < 0.26f) ||
+            (shrinking && animationPlayer == null)) // if shrinking is finished
         {
-            Node node = GetNode("/root/Node2D/Enemies");
+            Node node = GetNode(originalPath);
             GetParent().RemoveChild(this);
             node.AddChild(this);
 
             // teleport to other portal
-            GlobalPosition = teleportTarget.GlobalPosition;
-            RotationDegrees = 180f;
-            velocity.x = -velocity.x;
-            velocity.y = -velocity.y;
-            //velocity += ((PlayerShip)teleportTarget.GetParent()).velocity;
+            if (this is Enemy)
+                ((Enemy)this).Turned = true;
+            if (this is Bullet)
+                ((Bullet)this).IsEnemyBullet = false;
+            GlobalPosition = teleportTarget.GlobalPosition + new Vector2(0.0f, Position.y);
+            Rotate((float)Math.PI);
 
-            // grow
             GrowToNormal();
         }
     }
@@ -94,11 +71,9 @@ public class PortalableObject : KinematicBody2D
     {
         if ((col.Collider as Node).Name == "Portal")
         {
-            Node portalNode = (Node)col.Collider;
-            Portal portal = (Portal)portalNode;
-            PortalType portalType = portal.portalType;
+            Portal portal = (Portal)col.Collider;
 
-            if (portalType == PortalType.Input)
+            if (portal.portalType == PortalType.Input)
             {
                 teleportTarget = (Node2D)GetNode(portal.pairedPortal);
                 return true; // this means the portal can be entered
@@ -110,15 +85,13 @@ public class PortalableObject : KinematicBody2D
     private void ShrinkToNothing()
     {
         shrinking = true;
-        // animationPlayer.CurrentAnimation = "shrink";
-        animationPlayer.Play("shrink_to_nothing");
+        animationPlayer?.Play("shrink_to_nothing");
     }
 
     private void GrowToNormal()
     {
         shrinking = false;
-        // animationPlayer.CurrentAnimation = "grow";
-        animationPlayer.Play("grow_to_full");
+        animationPlayer?.Play("grow_to_full");
     }
 
 }

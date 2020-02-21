@@ -1,10 +1,13 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Scripts/PlayerShip.cs" type="Script" id=1]
 [ext_resource path="res://Assets/red-heart-portal.svg" type="Texture" id=2]
 [ext_resource path="res://Assets/blue-heart-ship.svg" type="Texture" id=3]
 [ext_resource path="res://Scripts/Portal.cs" type="Script" id=4]
 [ext_resource path="res://Assets/red-heart-portal-top.svg" type="Texture" id=5]
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 22.9572, 25.4247 )
 
 [sub_resource type="Animation" id=1]
 resource_name = "bounce_scale"
@@ -23,7 +26,7 @@ tracks/0/keys = {
 }
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 21.2794, 69.151 )
+extents = Vector2( 43.005, 69.151 )
 
 [node name="Ship" type="KinematicBody2D"]
 position = Vector2( 558.215, 412.489 )
@@ -35,9 +38,9 @@ rotation = -1.5708
 z_index = -1
 texture = ExtResource( 3 )
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-rotation = -1.5708
-polygon = PoolVector2Array( 51, -40.8, 51, -39.2, 61, -26.2, 61, -0.5, 55.4, 13.5, 53.8, 13.5, 27, 40.3, 33, 44.4, 33, 50.3, 28.8, 54.5, 26.5, 54.5, 8.5, 63.5, -6.7, 63.5, -30, 53.8, -30, 52, -34.2, 43.5, -30.9, 43.5, -28.1, 40.1, -58, 9.3, -58, 7, -61, 1, -61, -22.1, -57.5, -33.5, -56, -33.5, -51, -40.5, -48.6, -40.5, -6.5, -63.5, 0.799999, -63.5 )
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( -1, 1.5 )
+shape = SubResource( 3 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/bounce_scale = SubResource( 1 )
@@ -54,4 +57,5 @@ z_index = 1
 texture = ExtResource( 5 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Portal"]
+position = Vector2( -22, 0 )
 shape = SubResource( 2 )
