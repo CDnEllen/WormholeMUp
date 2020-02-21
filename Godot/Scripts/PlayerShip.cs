@@ -37,6 +37,8 @@ public class PlayerShip : Area2D
             inputDirection.Normalized();
         velocity = inputDirection * speed;
         Translate(velocity);
+
+        GlobalPosition = new Vector2(Mathf.Clamp(GlobalPosition.x, 0f, 1920f), Mathf.Clamp(GlobalPosition.y, 0f, 1080f));
     }
 
     public void CheckMovement()
