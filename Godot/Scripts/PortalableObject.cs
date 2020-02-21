@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public class PortalableObject : KinematicBody2D
+public class PortalableObject : Area2D
 {
     [Export]
     protected Vector2 velocity = new Vector2();
@@ -26,14 +26,14 @@ public class PortalableObject : KinematicBody2D
     {
         if (!shrinking)
         {
-            KinematicCollision2D col = MoveAndCollide(velocity, true, true, true);
             Translate(velocity.Rotated(this.Rotation));
-            if (col != null)
+
+            foreach (Area2D area in GetOverlappingAreas())
             {
                 if ((this is Enemy && !((Enemy)this).Turned) ||
                     (this is Bullet && ((Bullet)this).IsEnemyBullet))
                 {
-                    bool isInputCapablePortal = CheckPortalType(col);
+                    bool isInputCapablePortal = CheckPortalType(area);
                     if (isInputCapablePortal)
                     {
                         float y = GlobalPosition.y;
@@ -41,7 +41,7 @@ public class PortalableObject : KinematicBody2D
                         ShrinkToNothing();
                         originalPath = GetParent().GetPath();
                         GetParent().RemoveChild(this);
-                        ((Node2D)col.Collider).AddChild(this);
+                        area.AddChild(this);
                         GlobalPosition = new Vector2(GlobalPosition.x, y);
                     }
                 }
@@ -67,11 +67,11 @@ public class PortalableObject : KinematicBody2D
         }
     }
 
-    private bool CheckPortalType(KinematicCollision2D col)
+    private bool CheckPortalType(Area2D col)
     {
-        if ((col.Collider as Node).Name == "Portal")
+        if (col.Name == "Portal")
         {
-            Portal portal = (Portal)col.Collider;
+            Portal portal = (Portal)col;
 
             if (portal.portalType == PortalType.Input)
             {

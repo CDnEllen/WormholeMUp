@@ -8,11 +8,8 @@ public enum ShipControlScheme
     RightStick,
 }
 
-public class PlayerShip : KinematicBody2D
+public class PlayerShip : Area2D
 {
-    // Declare member variables here. Examples:
-    // private int a = 2;
-    // private string b = "text";
     [Export]
     private ShipControlScheme controlScheme;
     [Export]
@@ -40,8 +37,6 @@ public class PlayerShip : KinematicBody2D
             inputDirection.Normalized();
         velocity = inputDirection * speed;
         Translate(velocity);
-
-
     }
 
     public void CheckMovement()

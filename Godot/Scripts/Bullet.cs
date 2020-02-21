@@ -20,19 +20,16 @@ public class Bullet : PortalableObject
     {
         base._PhysicsProcess(delta);
 
-        KinematicCollision2D col = MoveAndCollide(Vector2.Zero, true, true, true);
-        if (col != null)
+        foreach(Area2D area in GetOverlappingAreas())
         {
-            Node2D collidingNode = ((Node2D)col.Collider);
-
-            if (collidingNode is PlayerShip)
-                collidingNode.Free();
-            else if (collidingNode is Enemy)
+            if (area is PlayerShip)
+                area.Free();
+            else if (area is Enemy)
             {
-                if (((Enemy)collidingNode).Turned && IsEnemyBullet ||
-                    !((Enemy)collidingNode).Turned && !IsEnemyBullet)
+                if (((Enemy)area).Turned && IsEnemyBullet ||
+                    !((Enemy)area).Turned && !IsEnemyBullet)
                 {
-                    collidingNode.Free();
+                    area.Free();
                 }
             }
         }

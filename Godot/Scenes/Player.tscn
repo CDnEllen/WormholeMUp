@@ -28,7 +28,7 @@ tracks/0/keys = {
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 43.005, 69.151 )
 
-[node name="Ship" type="KinematicBody2D"]
+[node name="Ship" type="Area2D"]
 position = Vector2( 558.215, 412.489 )
 script = ExtResource( 1 )
 speed = 15.0
@@ -45,7 +45,7 @@ shape = SubResource( 3 )
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/bounce_scale = SubResource( 1 )
 
-[node name="Portal" type="KinematicBody2D" parent="."]
+[node name="Portal" type="Area2D" parent="."]
 position = Vector2( 100, 0 )
 script = ExtResource( 4 )
 
