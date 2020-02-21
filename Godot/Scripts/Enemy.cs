@@ -4,16 +4,20 @@ using System;
 public class Enemy : PortalableObject
 {
     [Export]
-    public NodePath BulletSpawnPoint;
+    public NodePath BulletSpawnPoint1;
+    [Export]
+    public NodePath BulletSpawnPoint2;
     [Export]
     public int ShootInterval;
     int shootTimer = 0;
     public bool Turned;
+    PackedScene bulletScene;
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
         base._Ready();
+        bulletScene = (PackedScene)ResourceLoader.Load("res://Scenes/Bullet.tscn");
     }
 
     public override void _Process(float delta)
@@ -33,15 +37,26 @@ public class Enemy : PortalableObject
         {
             shootTimer = 0;
 
-            // Bullet Spawning
-            var bulletScene = (PackedScene)ResourceLoader.Load("res://Scenes/Bullet.tscn");
-            Bullet instance = (Bullet)bulletScene.Instance();
-            GetNode("/root/Node2D/Bullets").AddChild(instance);
-            instance.GlobalPosition = ((Node2D)GetNode(BulletSpawnPoint)).GlobalPosition;
-            instance.GlobalRotation = GlobalRotation;
-            instance.IsEnemyBullet = !Turned;
-            if (Turned)
-                ((Sprite)instance.GetNode("./Sprite")).SelfModulate = instance.FriendlyBulletColor;
+            for (int i = 0; i < 3; i++)
+            {
+                // Bullet Spawning
+                Bullet instance = (Bullet)bulletScene.Instance();
+                GetNode("/root/Node2D/Bullets").AddChild(instance);
+
+                if (i % 2 == 0)
+                {
+                    instance.GlobalPosition = ((Node2D)GetNode(BulletSpawnPoint1)).GlobalPosition;
+                }
+                if (i % 2 == 1)
+                {
+                    instance.GlobalPosition = ((Node2D)GetNode(BulletSpawnPoint2)).GlobalPosition;
+                }
+
+                instance.GlobalRotation = GlobalRotation;
+                instance.IsEnemyBullet = !Turned;
+                if (Turned)
+                    ((Sprite)instance.GetNode("./Sprite")).SelfModulate = instance.FriendlyBulletColor;
+            }
         }
     }
 }

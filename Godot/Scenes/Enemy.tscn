@@ -43,7 +43,8 @@ position = Vector2( 1533.88, 393.202 )
 script = ExtResource( 1 )
 velocity = Vector2( -5, 0 )
 animationPlayerNode = NodePath("AnimationPlayer")
-BulletSpawnPoint = NodePath("BulletSpawnPoint")
+BulletSpawnPoint1 = NodePath("BulletSpawnPoint1")
+BulletSpawnPoint2 = NodePath("BulletSpawnPoint2")
 ShootInterval = 10
 
 [node name="enemy-ship-1" type="Sprite" parent="."]
@@ -58,5 +59,8 @@ shape = SubResource( 2 )
 anims/grow_to_full = SubResource( 3 )
 anims/shrink_to_nothing = SubResource( 4 )
 
-[node name="BulletSpawnPoint" type="Node2D" parent="."]
-position = Vector2( -96, 0 )
+[node name="BulletSpawnPoint1" type="Node2D" parent="."]
+position = Vector2( -80, -23 )
+
+[node name="BulletSpawnPoint2" type="Node2D" parent="."]
+position = Vector2( -80, 23 )
