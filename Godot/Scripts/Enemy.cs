@@ -9,6 +9,8 @@ public class Enemy : PortalableObject
     public NodePath BulletSpawnPoint2;
     [Export]
     public int ShootInterval;
+    [Export]
+    public Vector2 EnemySize;
     int shootTimer = 0;
     public bool Turned;
     PackedScene bulletScene;
