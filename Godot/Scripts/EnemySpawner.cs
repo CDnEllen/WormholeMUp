@@ -26,27 +26,6 @@ public class EnemySpawner : Node2D
             enemyScenes[i] = (PackedScene)ResourceLoader.Load("res://Scenes/Enemy" + i + ".tscn");
         }
 
-
-        // for (int i = 0; i < 3; i++)
-        //     {
-        //         // Bullet Spawning
-        //         Bullet instance = (Bullet)bulletScene.Instance();
-        //         GetNode("/root/Node2D/Bullets").AddChild(instance);
-
-        //         if (i % 2 == 0)
-        //         {
-        //             instance.GlobalPosition = ((Node2D)GetNode(BulletSpawnPoint1)).GlobalPosition;
-        //         }
-        //         if (i % 2 == 1)
-        //         {
-        //             instance.GlobalPosition = ((Node2D)GetNode(BulletSpawnPoint2)).GlobalPosition;
-        //         }
-
-        //         instance.GlobalRotation = GlobalRotation;
-        //         instance.IsEnemyBullet = !Turned;
-        //         if (Turned)
-        //             ((Sprite)instance.GetNode("./Sprite")).SelfModulate = instance.FriendlyBulletColor;
-        //     }
     }
 
     //  // Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -71,7 +50,7 @@ public class EnemySpawner : Node2D
         return -1;
     }
 
-    private void SpawnEnemy(int enemyType, SpawnPosition position, float rotation = 9001) // random magic number (yes, I know that's bad) to indicate the rotation should be taken from the SpawnPosition options
+    private void SpawnEnemy(int enemyType, SpawnPosition position, float rotation = 9001f) // random magic number (yes, I know that's bad) to indicate the rotation should be taken from the SpawnPosition options
     {
         // spawn enemy as node
         Enemy instance = (Enemy)enemyScenes[enemyType].Instance();
@@ -321,7 +300,10 @@ public class EnemySpawner : Node2D
         // instance.GlobalPosition = ((Node2D)GetNode(BulletSpawnPoint1)).GlobalPosition;
 
         // rotate enemy - by default, this faces the default enemy aim target, about a quarter of the way from the left of the screen and in the middile - roughly where the player mostly is
-        instance.GlobalRotationDegrees = Mathf.Atan2(defaultEnemyAimTarget.y - instance.GlobalPosition.y, defaultEnemyAimTarget.x - instance.GlobalPosition.x);
+        if (rotation > 9000f)
+            instance.GlobalRotationDegrees = Mathf.Atan2(defaultEnemyAimTarget.y - instance.GlobalPosition.y, defaultEnemyAimTarget.x - instance.GlobalPosition.x);
+        else
+            instance.GlobalRotationDegrees = rotation;
 
         // add to gamemanager for tracking if destroyed for score?
     }
