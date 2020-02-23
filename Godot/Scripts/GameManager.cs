@@ -10,6 +10,7 @@ public class WaveData
 
 public class GameManager : Node
 {
+    private int score = 0;
     [Export]
     private int NumWaves;
     public static List<WaveData> Waves = new List<WaveData>();
@@ -41,5 +42,12 @@ public class GameManager : Node
             }
             Waves[i].Length = longest;
         }
+    }
+
+    public override void _PhysicsProcess(float delta)
+    {
+        base._PhysicsProcess(delta);
+        score++;
+        ((RichTextLabel)GetNode("./ScoreText")).Text = "SCORE: " + score;
     }
 }
