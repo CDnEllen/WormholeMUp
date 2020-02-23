@@ -18,7 +18,8 @@ _global_script_class_icons={
 config/name="Godot"
 config/description="An entry for the Brackeys Jam 2020.1."
 run/main_scene="res://Scenes/Main.tscn"
-config/icon="res://icon.png"
+config/icon="res://Assets/heart.png"
+config/windows_native_icon="res://Assets/heart icon.ico"
 
 [debug]
 
