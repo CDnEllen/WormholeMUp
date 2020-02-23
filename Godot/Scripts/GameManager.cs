@@ -19,6 +19,9 @@ public class GameManager : Node
 
     public static int currentLevel = 0; // 0 for pre-game/menu, use 1-? for actual levels
 
+    public static int score = 0;
+    public static bool scoreLocked = false;
+
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {

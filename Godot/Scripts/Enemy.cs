@@ -61,9 +61,11 @@ public class Enemy : PortalableObject
             }
         }
 
-        foreach(Area2D area in GetOverlappingAreas())
+        foreach (Area2D area in GetOverlappingAreas())
             if (area is OutOfBounds)
             {
+                if (!GameManager.scoreLocked)
+                    GameManager.score += 1;
                 this.Free();
                 return;
             }

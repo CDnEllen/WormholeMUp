@@ -14,7 +14,7 @@ public class Bullet : PortalableObject
     {
         base._PhysicsProcess(delta);
 
-        foreach(Area2D area in GetOverlappingAreas())
+        foreach (Area2D area in GetOverlappingAreas())
         {
             if (area is PlayerShip && IsEnemyBullet)
                 area.Free();
@@ -23,6 +23,8 @@ public class Bullet : PortalableObject
                 if (((Enemy)area).Turned && IsEnemyBullet ||
                     !((Enemy)area).Turned && !IsEnemyBullet)
                 {
+                    if (!GameManager.scoreLocked)
+                        GameManager.score += 1;
                     area.Free();
                 }
             }
