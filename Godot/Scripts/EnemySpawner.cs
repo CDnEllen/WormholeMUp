@@ -30,6 +30,16 @@ public class EnemySpawner : Node2D
 
     public override void _PhysicsProcess(float delta)
     {
+        if (waveProgress > GameManager.Waves[wave].Length)
+        {
+            waveProgress = -120;
+            wave++;
+            if (wave >= GameManager.Waves.Count)
+            {
+                wave = 0;
+            }
+        }
+
         foreach (SpawnData spawn in GameManager.Waves[wave].Spawns)
         {
             if (spawn.SpawnTime == waveProgress)

@@ -14,25 +14,56 @@ public class Bullet : PortalableObject
     {
         base._PhysicsProcess(delta);
 
-        foreach (Area2D area in GetOverlappingAreas())
+        try
         {
-            if (area is PlayerShip && IsEnemyBullet)
-                area.Free();
-            else if (area is Enemy)
+            foreach (Area2D area in GetOverlappingAreas())
             {
-                if (((Enemy)area).Turned && IsEnemyBullet ||
-                    !((Enemy)area).Turned && !IsEnemyBullet)
+                if (area is PlayerShip && IsEnemyBullet)
                 {
-                    if (!GameManager.scoreLocked)
-                        GameManager.score += 1;
+                    GameManager.scoreLocked = true;
+                    try
+                    {
+                        GetTree().Root.FindNode("PlayerA", true, false).Free();
+                    }
+                    catch
+                    {
+
+                    }
+                    try
+                    {
+                        GetTree().Root.FindNode("PlayerB", true, false).Free();
+                    }
+                    catch
+                    {
+
+                    }
+
+
+
                     area.Free();
                 }
-            }
-            else if (area is OutOfBounds)
-            {
-                this.Free();
-                return;
+
+                else if (area is Enemy)
+                {
+                    if (((Enemy)area).Turned && IsEnemyBullet ||
+                        !((Enemy)area).Turned && !IsEnemyBullet)
+                    {
+                        if (!GameManager.scoreLocked)
+                            GameManager.score += 5;
+                        area.Free();
+                    }
+                }
+                else if (area is OutOfBounds)
+                {
+                    this.Free();
+                    return;
+                }
             }
         }
+        catch
+        {
+
+        }
+
     }
 }

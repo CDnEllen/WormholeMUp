@@ -1,0 +1,79 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Scripts/SpawnData.cs" type="Script" id=1]
+
+[node name="Wave1Data" type="Node2D"]
+
+[node name="SpawnData" type="Node2D" parent="."]
+position = Vector2( 1920, 32 )
+rotation = -0.872665
+script = ExtResource( 1 )
+SpawnTime = 60
+
+[node name="SpawnData2" type="Node2D" parent="."]
+position = Vector2( 1920, 1024 )
+rotation = 0.872665
+script = ExtResource( 1 )
+SpawnTime = 60
+
+[node name="SpawnData3" type="Node2D" parent="."]
+position = Vector2( 2048, 480 )
+rotation = -0.261799
+script = ExtResource( 1 )
+SpawnTime = 180
+
+[node name="SpawnData4" type="Node2D" parent="."]
+position = Vector2( 2048, 608 )
+rotation = 0.261799
+script = ExtResource( 1 )
+SpawnTime = 180
+
+[node name="SpawnData5" type="Node2D" parent="."]
+position = Vector2( 2312.32, 128 )
+script = ExtResource( 1 )
+SpawnTime = 250
+
+[node name="SpawnData6" type="Node2D" parent="."]
+position = Vector2( 2522.79, 224 )
+script = ExtResource( 1 )
+SpawnTime = 250
+
+[node name="SpawnData7" type="Node2D" parent="."]
+position = Vector2( 2716.51, 320 )
+script = ExtResource( 1 )
+SpawnTime = 250
+
+[node name="SpawnData8" type="Node2D" parent="."]
+position = Vector2( 2895.89, 416 )
+script = ExtResource( 1 )
+SpawnTime = 250
+
+[node name="SpawnData9" type="Node2D" parent="."]
+position = Vector2( 3077.65, 512 )
+script = ExtResource( 1 )
+SpawnTime = 250
+
+[node name="SpawnData10" type="Node2D" parent="."]
+position = Vector2( 3077.65, 608 )
+script = ExtResource( 1 )
+SpawnTime = 250
+
+[node name="SpawnData11" type="Node2D" parent="."]
+position = Vector2( 2895.89, 704 )
+script = ExtResource( 1 )
+SpawnTime = 250
+
+[node name="SpawnData12" type="Node2D" parent="."]
+position = Vector2( 2716.51, 800 )
+script = ExtResource( 1 )
+SpawnTime = 250
+
+[node name="SpawnData13" type="Node2D" parent="."]
+position = Vector2( 2522.79, 896 )
+script = ExtResource( 1 )
+SpawnTime = 250
+
+[node name="SpawnData14" type="Node2D" parent="."]
+position = Vector2( 2312.32, 992 )
+script = ExtResource( 1 )
+SpawnTime = 250

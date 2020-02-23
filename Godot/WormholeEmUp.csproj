@@ -3,11 +3,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Tools</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{17519C71-EACA-4351-ACB5-248C30A17973}</ProjectGuid>
+    <ProjectGuid>{40BE5EBB-F661-4E22-BE05-21C594A14D68}</ProjectGuid>
     <OutputType>Library</OutputType>
     <OutputPath>.mono\temp\bin\$(Configuration)</OutputPath>
-    <RootNamespace>Godot</RootNamespace>
-    <AssemblyName>Godot</AssemblyName>
+    <RootNamespace>WormholeEmUp</RootNamespace>
+    <AssemblyName>WormholeEmUp</AssemblyName>
     <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
     <GodotProjectGeneratorVersion>1.0.7333.3918</GodotProjectGeneratorVersion>
     <BaseIntermediateOutputPath>.mono\temp\obj</BaseIntermediateOutputPath>
@@ -43,31 +43,23 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="GodotSharp">
+      <HintPath>$(ProjectDir)\.mono\assemblies\$(ApiConfiguration)\GodotSharp.dll</HintPath>
       <Private>False</Private>
-      <HintPath>$(ProjectDir)/.mono/assemblies/$(ApiConfiguration)/GodotSharp.dll</HintPath>
     </Reference>
     <Reference Include="GodotSharpEditor" Condition=" '$(Configuration)' == 'Tools' ">
+      <HintPath>$(ProjectDir)\.mono\assemblies\$(ApiConfiguration)\GodotSharpEditor.dll</HintPath>
       <Private>False</Private>
-      <HintPath>$(ProjectDir)/.mono/assemblies/$(ApiConfiguration)/GodotSharpEditor.dll</HintPath>
     </Reference>
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Scenes\PauseManager.cs" />
-    <Compile Include="Scripts\GameManager.cs" />
     <Compile Include="Scripts\EnemySpawner.cs" />
-    <Compile Include="Scripts\Enemy.cs" />
-    <Compile Include="Scripts\Bullet.cs" />
+    <Compile Include="Scripts\GameManager.cs" />
     <Compile Include="Scripts\OutOfBounds.cs" />
     <Compile Include="Scripts\PlayerShip.cs" />
     <Compile Include="Scripts\Portal.cs" />
-    <Compile Include="Scripts\PortalableObject.cs" />
-    <Compile Include="Scripts\SimpleMove.cs" />
-    <Compile Include="Scripts\SpawnData.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Scenes\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

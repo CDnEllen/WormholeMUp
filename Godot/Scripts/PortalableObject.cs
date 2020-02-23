@@ -63,9 +63,15 @@ public class PortalableObject : Area2D
                 ((Bullet)this).IsEnemyBullet = false;
                 ((Sprite)GetNode("./Sprite")).SelfModulate = ((Bullet)this).FriendlyBulletColor;
             }
-            GlobalPosition = teleportTarget.GlobalPosition + new Vector2(0.0f, Position.y);
-            Rotate((float)Math.PI);
+            try
+            {
+                GlobalPosition = teleportTarget.GlobalPosition + new Vector2(0.0f, Position.y);
+                Rotate((float)Math.PI);
+            }
+            catch
+            {
 
+            }
             GrowToNormal();
         }
     }
@@ -78,7 +84,15 @@ public class PortalableObject : Area2D
 
             if (portal.portalType == PortalType.Input)
             {
-                teleportTarget = (Node2D)GetNode(portal.pairedPortal);
+                try
+                {
+                    teleportTarget = (Node2D)GetNode(portal.pairedPortal);
+                }
+                catch
+                {
+                    return false; // the paired portal is missing!
+                }
+
                 return true; // this means the portal can be entered
             }
         }
