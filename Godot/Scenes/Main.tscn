@@ -7,7 +7,7 @@
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource( 4 )
-WaveDataPaths = PoolStringArray( "Wave1" )
+NumWaves = 1
 
 [node name="PlayerA" parent="." instance=ExtResource( 1 )]
 controlScheme = 2

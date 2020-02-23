@@ -11,7 +11,7 @@ public class WaveData
 public class GameManager : Node
 {
     [Export]
-    private string[] WaveDataPaths;
+    private int NumWaves;
     public static List<WaveData> Waves = new List<WaveData>();
 
     public static int SCREEN_WIDTH = 1920;
@@ -22,9 +22,9 @@ public class GameManager : Node
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
-        for (int i = 0; i < WaveDataPaths.Length; i++)
+        for (int i = 0; i < NumWaves; i++)
         {
-            PackedScene scene = (PackedScene)ResourceLoader.Load("res://Scenes/" + WaveDataPaths[i] + ".tscn");
+            PackedScene scene = (PackedScene)ResourceLoader.Load("res://Scenes/Wave" + i + ".tscn");
             Node2D root = (Node2D)scene.Instance();
             this.AddChild(root);
             Waves.Add(new WaveData { Spawns = new SpawnData[root.GetChildCount()] });
