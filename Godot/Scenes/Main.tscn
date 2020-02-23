@@ -1,10 +1,13 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Scenes/Enemy.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Assets/red-heart-ship.svg" type="Texture" id=3]
+[ext_resource path="res://Scripts/GameManager.cs" type="Script" id=4]
+[ext_resource path="res://Scripts/EnemySpawner.cs" type="Script" id=5]
 
 [node name="Node2D" type="Node2D"]
+script = ExtResource( 4 )
+WaveDataPaths = PoolStringArray( "Wave1" )
 
 [node name="PlayerA" parent="." instance=ExtResource( 1 )]
 controlScheme = 2
@@ -12,9 +15,15 @@ controlScheme = 2
 [node name="Sprite" parent="PlayerA" index="0"]
 texture = ExtResource( 3 )
 
+[node name="CollisionShape2D" parent="PlayerA" index="1"]
+position = Vector2( -3.70178, -0.121094 )
+
 [node name="Portal" parent="PlayerA" index="3"]
 portalType = 2
 pairedPortal = NodePath("../../PlayerB/Portal")
+
+[node name="CollisionShape2D" parent="PlayerA/Portal" index="1"]
+position = Vector2( -29.0247, 1.08072 )
 
 [node name="PlayerB" parent="." instance=ExtResource( 1 )]
 position = Vector2( 424.39, 662.871 )
@@ -26,18 +35,12 @@ pairedPortal = NodePath("../../PlayerA/Portal")
 
 [node name="Enemies" type="Node2D" parent="."]
 
-[node name="Enemy3" parent="Enemies" instance=ExtResource( 2 )]
-
-[node name="Enemy2" parent="Enemies" instance=ExtResource( 2 )]
-position = Vector2( 1297.44, 424.759 )
-
-[node name="Enemy" parent="Enemies" instance=ExtResource( 2 )]
-position = Vector2( 1535.87, 457.4 )
-
 [node name="Bullets" type="Node2D" parent="."]
+
+[node name="EnemySpawner" type="Node2D" parent="."]
+script = ExtResource( 5 )
+EnemyContainer = NodePath("../Enemies")
 
 [editable path="PlayerA"]
 
 [editable path="PlayerB"]
-
-[editable path="Enemies/Enemy"]

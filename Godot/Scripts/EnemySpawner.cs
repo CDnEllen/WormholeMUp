@@ -3,13 +3,13 @@ using System;
 
 public class EnemySpawner : Node2D
 {
-    // Declare member variables here. Examples:
-    // private int a = 2;
-    // private string b = "text";
-
+    [Export]
+    public NodePath EnemyContainer;
     PackedScene[] enemyScenes;
-    public int enemyTypeCount = 0; // number of enemy types
+    public int enemyTypeCount = 1; // number of enemy types
 
+    public int wave = 0;
+    public int waveProgress = 0;
     private int gameTimer = 0;
     static private Random random = new Random();
     private Vector2 defaultEnemyAimTarget = new Vector2(GameManager.SCREEN_WIDTH * 0.25f, GameManager.SCREEN_HEIGHT * 0.5f);
@@ -28,19 +28,19 @@ public class EnemySpawner : Node2D
 
     }
 
-    //  // Called every frame. 'delta' is the elapsed time since the previous frame.
-    //  public override void _Process(float delta)
-    //  {
-    //      
-    //  }
-
     public override void _PhysicsProcess(float delta)
     {
-        int spawn = ShouldSpawnEnemy();
-        if (spawn > -1)
+        foreach (SpawnData spawn in GameManager.Waves[wave].Spawns)
         {
-            SpawnEnemy(0, SpawnPosition.CenterRight);
+            if (spawn.SpawnTime == waveProgress)
+            {
+                Node2D enemy = (Node2D)enemyScenes[spawn.EnemyType].Instance();
+                GetNode(EnemyContainer).AddChild(enemy);
+                enemy.GlobalPosition = spawn.Position;
+                enemy.GlobalPosition = new Vector2(Mathf.Clamp(enemy.GlobalPosition.x, 0.0f, 1920.0f), Mathf.Clamp(enemy.GlobalPosition.y, 0.0f, 1080.0f));
+            }
         }
+        waveProgress++;
     }
 
     private int ShouldSpawnEnemy()
@@ -54,7 +54,7 @@ public class EnemySpawner : Node2D
     {
         // spawn enemy as node
         Enemy instance = (Enemy)enemyScenes[enemyType].Instance();
-        GetNode("/root/Node2D/Enemies").AddChild(instance);
+        GetNode(EnemyContainer).AddChild(instance);
 
         // position enemy
         Vector2 enemyOffset = new Vector2(instance.EnemySize.x * 0.5f, instance.EnemySize.y * 0.5f);

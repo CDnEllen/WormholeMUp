@@ -1,0 +1,75 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Scripts/SpawnData.cs" type="Script" id=1]
+
+[node name="Wave1Data" type="Node2D"]
+
+[node name="SpawnData" type="Node2D" parent="."]
+position = Vector2( 1920, 32 )
+script = ExtResource( 1 )
+SpawnTime = 60
+
+[node name="SpawnData2" type="Node2D" parent="."]
+position = Vector2( 1920, 1024 )
+script = ExtResource( 1 )
+SpawnTime = 60
+
+[node name="SpawnData3" type="Node2D" parent="."]
+position = Vector2( 2048, 480 )
+script = ExtResource( 1 )
+SpawnTime = 180
+
+[node name="SpawnData4" type="Node2D" parent="."]
+position = Vector2( 2048, 608 )
+script = ExtResource( 1 )
+SpawnTime = 180
+
+[node name="SpawnData5" type="Node2D" parent="."]
+position = Vector2( 2176, 128 )
+script = ExtResource( 1 )
+SpawnTime = 500
+
+[node name="SpawnData6" type="Node2D" parent="."]
+position = Vector2( 2176, 224 )
+script = ExtResource( 1 )
+SpawnTime = 530
+
+[node name="SpawnData7" type="Node2D" parent="."]
+position = Vector2( 2176, 320 )
+script = ExtResource( 1 )
+SpawnTime = 600
+
+[node name="SpawnData8" type="Node2D" parent="."]
+position = Vector2( 2176, 416 )
+script = ExtResource( 1 )
+SpawnTime = 650
+
+[node name="SpawnData9" type="Node2D" parent="."]
+position = Vector2( 2176, 512 )
+script = ExtResource( 1 )
+SpawnTime = 700
+
+[node name="SpawnData10" type="Node2D" parent="."]
+position = Vector2( 2176, 608 )
+script = ExtResource( 1 )
+SpawnTime = 750
+
+[node name="SpawnData11" type="Node2D" parent="."]
+position = Vector2( 2176, 704 )
+script = ExtResource( 1 )
+SpawnTime = 800
+
+[node name="SpawnData12" type="Node2D" parent="."]
+position = Vector2( 2176, 800 )
+script = ExtResource( 1 )
+SpawnTime = 850
+
+[node name="SpawnData13" type="Node2D" parent="."]
+position = Vector2( 2176, 896 )
+script = ExtResource( 1 )
+SpawnTime = 900
+
+[node name="SpawnData14" type="Node2D" parent="."]
+position = Vector2( 2176, 992 )
+script = ExtResource( 1 )
+SpawnTime = 950

@@ -6,11 +6,10 @@
 [ext_resource path="res://Scripts/Portal.cs" type="Script" id=4]
 [ext_resource path="res://Assets/red-heart-portal-top.svg" type="Texture" id=5]
 
-[sub_resource type="RectangleShape2D" id=3]
+[sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 22.9572, 25.4247 )
 
-[sub_resource type="Animation" id=1]
-resource_name = "bounce_scale"
+[sub_resource type="Animation" id=2]
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:scale")
@@ -25,8 +24,8 @@ tracks/0/keys = {
 "values": [ Vector2( 1, 1 ), Vector2( 0.95, 0.95 ), Vector2( 1, 1 ) ]
 }
 
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 43.005, 69.151 )
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 56.3608, 95.2794 )
 
 [node name="Ship" type="Area2D"]
 position = Vector2( 558.215, 412.489 )
@@ -40,10 +39,10 @@ texture = ExtResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( -1, 1.5 )
-shape = SubResource( 3 )
+shape = SubResource( 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/bounce_scale = SubResource( 1 )
+anims/bounce_scale = SubResource( 2 )
 
 [node name="Portal" type="Area2D" parent="."]
 position = Vector2( 100, 0 )
@@ -58,4 +57,4 @@ texture = ExtResource( 5 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Portal"]
 position = Vector2( -22, 0 )
-shape = SubResource( 2 )
+shape = SubResource( 3 )

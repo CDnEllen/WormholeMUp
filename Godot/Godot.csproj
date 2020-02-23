@@ -62,6 +62,7 @@
     <Compile Include="Scripts\Portal.cs" />
     <Compile Include="Scripts\PortalableObject.cs" />
     <Compile Include="Scripts\SimpleMove.cs" />
+    <Compile Include="Scripts\SpawnData.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Scenes\" />
