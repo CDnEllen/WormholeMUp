@@ -60,5 +60,12 @@ public class Enemy : PortalableObject
                     ((Sprite)instance.GetNode("./Sprite")).SelfModulate = instance.FriendlyBulletColor;
             }
         }
+
+        foreach(Area2D area in GetOverlappingAreas())
+            if (area is OutOfBounds)
+            {
+                this.Free();
+                return;
+            }
     }
 }

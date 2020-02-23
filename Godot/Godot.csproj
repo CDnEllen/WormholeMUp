@@ -58,6 +58,7 @@
     <Compile Include="Scripts\EnemySpawner.cs" />
     <Compile Include="Scripts\Enemy.cs" />
     <Compile Include="Scripts\Bullet.cs" />
+    <Compile Include="Scripts\OutOfBounds.cs" />
     <Compile Include="Scripts\PlayerShip.cs" />
     <Compile Include="Scripts\Portal.cs" />
     <Compile Include="Scripts\PortalableObject.cs" />

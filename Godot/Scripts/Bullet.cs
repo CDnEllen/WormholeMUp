@@ -26,6 +26,11 @@ public class Bullet : PortalableObject
                     area.Free();
                 }
             }
+            else if (area is OutOfBounds)
+            {
+                this.Free();
+                return;
+            }
         }
     }
 }
